@@ -1,6 +1,7 @@
 package pageFunctions;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import pageElements.LoginTestPE;
@@ -9,10 +10,11 @@ public class LoginTestPF extends LoginTestPE{
 	 
 	
 	
-	public LoginTestPF(WebDriver driver) {
+	public LoginTestPF(RemoteWebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
+
 
 
 	public void setUsername(String strUser) {

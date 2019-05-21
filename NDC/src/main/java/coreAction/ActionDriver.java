@@ -3,11 +3,12 @@ package coreAction;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class ActionDriver extends OpenAndCloseBrowser{
 
 	
-protected WebDriver driver;
+//protected RemoteWebDriver driver;
 public static OpenAndCloseBrowser ocb = new OpenAndCloseBrowser();
 protected Actions action;
 

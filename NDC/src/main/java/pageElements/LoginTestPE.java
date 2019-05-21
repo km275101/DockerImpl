@@ -3,15 +3,16 @@ package pageElements;
 import org.openqa.selenium.WebDriver;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import coreAction.ActionDriver;
 
-public class LoginTestPE extends ActionDriver{
+public class LoginTestPE{
 	
 
-	public LoginTestPE(WebDriver driver) {
-		super(driver);
+	public LoginTestPE(RemoteWebDriver driver) {
+		super();
 		
 	}
 	
