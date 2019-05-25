@@ -13,7 +13,7 @@ public static OpenAndCloseBrowser ocb = new OpenAndCloseBrowser();
 protected Actions action;
 
 public ActionDriver(WebDriver driver) {
-	this.driver = driver;
+	this.driver = (RemoteWebDriver) driver;
 	action = new Actions(driver);
 	
 }

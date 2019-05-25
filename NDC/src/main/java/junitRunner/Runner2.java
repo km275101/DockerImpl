@@ -34,29 +34,29 @@ import dataProvider.LoginDataProvider;
 	glue = "defineStep"
 	)
 
-public class Runner2{
+public class Runner2 extends OpenAndCloseBrowser{
 	
-	//public RemoteWebDriver  driver;
-	public WebDriver  driver;
-	private TestNGCucumberRunner testRunner;
+	//public static RemoteWebDriver  driver;
+	//public WebDriver  driver;
+	public TestNGCucumberRunner testRunner;
 	
 	@Parameters({"browser","Url"})
 	@BeforeClass
-	public void setup(@Optional("ABC")String browser, String Url) throws InterruptedException, InvalidFormatException, MalformedURLException{
-		
+	public RemoteWebDriver setup(@Optional("ABC")String browser, String Url) throws InterruptedException, InvalidFormatException, MalformedURLException{
+		/*DesiredCapabilities cap =  new DesiredCapabilities();
+		ChromeOptions options;
+		String node = "http://192.168.2.5:4444/wd/hub";
 		if(browser.equalsIgnoreCase("CHROME")){
-			/*System.setProperty("webdriver.chrome.driver","C:\\Users\\kamlesh.maurya\\Downloads\\chromedriver_win32\\chromedriver.exe");
-			driver =  new ChromeDriver();*/
+			System.setProperty("webdriver.chrome.driver","C:\\Users\\kamlesh.maurya\\Downloads\\chromedriver_win32\\chromedriver.exe");
+			driver =  new ChromeDriver();
 			
-			//DesiredCapabilities cap =  DesiredCapabilities.chrome();
+			
 			//cap.setBrowserName("chrome");
-			ChromeOptions options = new ChromeOptions();
-			options.setCapability(CapabilityType.PLATFORM_NAME, Platform.WINDOWS);
-			options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
-			options.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-			driver = new RemoteWebDriver(new URL("http://10.227.33.152:4444/wd/hub"), options);
+			options = new ChromeOptions();
+			cap.setCapability(ChromeOptions.CAPABILITY, options);
+			driver = new RemoteWebDriver(new URL(node), options);
 			driver.manage().window().maximize();
-			
+			System.out.println(driver);
 			
 		}else if(browser.equalsIgnoreCase("FireFox")){
 			System.setProperty("webdriver.chrome.driver","C:\\Users\\kamlesh.maurya\\Downloads\\chromedriver_win32\\chromedriver.exe");
@@ -68,8 +68,12 @@ public class Runner2{
 		
 		LoginDataProvider ldp = new LoginDataProvider();
 		String url = ldp.getUrlDetails(Url);
-		driver.get(url);
+		driver.get(url);*/
+		setUp(browser,Url);
 		testRunner = new TestNGCucumberRunner(Runner2.class);
+		System.out.println(driver);
+		return driver;
+		
 	}
 	
 	@Test(description="login", dataProvider = "features")
@@ -77,17 +81,21 @@ public class Runner2{
 	{
 		testRunner.runCucumber(cFeature.getCucumberFeature());
 		
+		
 	}
 	
 	@DataProvider(name="features")
 	public Object[][] getFeatures()
 	{
 		return testRunner.provideFeatures();
+		//return driver;
 	}
 	
 	@AfterClass
 	public void tearDown()
 	{
+		driver.close();
+		driver.quit();
 		testRunner.finish();
 	}
 

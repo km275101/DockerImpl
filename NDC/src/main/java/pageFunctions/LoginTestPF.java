@@ -10,7 +10,7 @@ public class LoginTestPF extends LoginTestPE{
 	 
 	
 	
-	public LoginTestPF(RemoteWebDriver driver) {
+	public LoginTestPF(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
@@ -45,4 +45,10 @@ public class LoginTestPF extends LoginTestPE{
 		}
 	 
 	}
+    
+    public void logout() throws InterruptedException {
+    	//System.out.println("clicking submit button");
+		
+	}
+	
 }

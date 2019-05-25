@@ -1,36 +1,63 @@
 package coreAction;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.Parameters;
 
 import cucumber.api.testng.TestNGCucumberRunner;
+import dataProvider.LoginDataProvider;
 import junitRunner.Runner2;
 
 public class OpenAndCloseBrowser{
-public WebDriver driver;
+//public WebDriver driver;
+	public static RemoteWebDriver  driver;
 	
-	public void setUp(String browser, String Url) throws InterruptedException {
-		if(browser.equalsIgnoreCase("CHROME")){
-			System.setProperty("webdriver.chrome.driver","C:\\Users\\kamlesh.maurya\\Downloads\\chromedriver_win32\\chromedriver.exe");
-			driver =  new ChromeDriver();
-		}else if(browser.equalsIgnoreCase("FireFox")){
-			System.setProperty("webdriver.chrome.driver","C:\\Users\\kamlesh.maurya\\Downloads\\chromedriver_win32\\chromedriver.exe");
-			driver =  new FirefoxDriver();
-		}else{
-			System.setProperty("webdriver.chrome.driver","C:\\Users\\kamlesh.maurya\\Downloads\\chromedriver_win32\\chromedriver.exe");
-			driver =  new InternetExplorerDriver();
-		}
+	public RemoteWebDriver setUp(String browser, String locale) throws InterruptedException, InvalidFormatException, MalformedURLException {
+		DesiredCapabilities cap =  new DesiredCapabilities();
+			
+			
+			String node = "http://192.168.2.5:4444/wd/hub";
+			if(browser.equalsIgnoreCase("CHROME")){
+				/*System.setProperty("webdriver.chrome.driver","C:\\Users\\kamlesh.maurya\\Downloads\\chromedriver_win32\\chromedriver.exe");
+				driver =  new ChromeDriver();*/
+				
+				ChromeOptions options;
+				//cap.setBrowserName("chrome");
+				options = new ChromeOptions();
+				cap.setCapability(ChromeOptions.CAPABILITY, options);
+				driver = new RemoteWebDriver(new URL(node), options);
+				driver.manage().window().maximize();
+				System.out.println(driver);
+				
+			}else if(browser.equalsIgnoreCase("firefox")){
+				//System.setProperty("webdriver.chrome.driver","C:\\Users\\kamlesh.maurya\\Downloads\\chromedriver_win32\\chromedriver.exe");
+				System.out.println("Opening firefox driver");
+				cap = cap.firefox();
+				driver = new RemoteWebDriver(new URL(node), cap);
+				driver.manage().window().maximize();
+				System.out.println(driver);
+			}else{
+				System.setProperty("webdriver.chrome.driver","C:\\Users\\kamlesh.maurya\\Downloads\\chromedriver_win32\\chromedriver.exe");
+				driver =  new InternetExplorerDriver();
+			}
+			
+			
+			LoginDataProvider ldp = new LoginDataProvider();
+			String url = ldp.getUrlDetails(locale);
+			driver.get(url);
+			System.out.println(driver);
 		
-		System.out.println();
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		System.out.println("OCB");
-		//return driver;
+		return driver;
 		
 	}
 

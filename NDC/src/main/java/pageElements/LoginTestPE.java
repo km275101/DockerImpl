@@ -11,7 +11,7 @@ import coreAction.ActionDriver;
 public class LoginTestPE{
 	
 
-	public LoginTestPE(RemoteWebDriver driver) {
+	public LoginTestPE(WebDriver driver) {
 		super();
 		
 	}
