@@ -29,7 +29,7 @@ public class AmazonImplementation2 extends Initialize{
 		lpf.clickYourOrders();
 		List<String> l = ldp.getUserDetails();
 		String userName = l.get(0);
-		String pass = l.get(1);
+		String pass = l.get(1).toString();
 		lpf.setUsername(userName);
 		lpf.clickLogin();
 		lpf.setPass(pass);
@@ -45,6 +45,7 @@ public class AmazonImplementation2 extends Initialize{
 	@Then("^user sees the login page$")
 	public void user_sees_the_login_page() throws Throwable {
 	    System.out.println("Successful login");
+	    
 	}
 
 }
