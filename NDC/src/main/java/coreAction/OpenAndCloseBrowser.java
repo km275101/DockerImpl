@@ -26,16 +26,16 @@ public class OpenAndCloseBrowser{
 		DesiredCapabilities cap =  new DesiredCapabilities();
 			
 			
-			String node = "http://192.168.2.5:4444/wd/hub";
+			//String node = "http://192.168.2.5:4444/wd/hub";
 			if(browser.equalsIgnoreCase("CHROME")){
-				/*System.setProperty("webdriver.chrome.driver","C:\\Users\\kamlesh.maurya\\Downloads\\chromedriver_win32\\chromedriver.exe");
-				driver =  new ChromeDriver();*/
+				System.setProperty("webdriver.chrome.driver","C:\\Users\\kamlesh.maurya\\Downloads\\chromedriver_win32\\chromedriver.exe");
+				driver =  new ChromeDriver();
 				
 				ChromeOptions options;
 				//cap.setBrowserName("chrome");
 				options = new ChromeOptions();
 				cap.setCapability(ChromeOptions.CAPABILITY, options);
-				driver = new RemoteWebDriver(new URL(node), options);
+				//driver = new RemoteWebDriver(new URL(node), options);
 				driver.manage().window().maximize();
 				System.out.println(driver);
 				
@@ -43,7 +43,7 @@ public class OpenAndCloseBrowser{
 				//System.setProperty("webdriver.chrome.driver","C:\\Users\\kamlesh.maurya\\Downloads\\chromedriver_win32\\chromedriver.exe");
 				System.out.println("Opening firefox driver");
 				cap = cap.firefox();
-				driver = new RemoteWebDriver(new URL(node), cap);
+				//driver = new RemoteWebDriver(new URL(node), cap);
 				driver.manage().window().maximize();
 				System.out.println(driver);
 			}else{
