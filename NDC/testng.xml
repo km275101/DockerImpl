@@ -6,6 +6,7 @@
   <parameter name="browser" value="chrome" />
   <parameter name="Url" value="amazon" />
     <classes>
+    
       <class name="junitRunner.Runner2"/>
     </classes>
   </test>
